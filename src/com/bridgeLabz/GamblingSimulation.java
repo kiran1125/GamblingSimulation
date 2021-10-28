@@ -10,6 +10,7 @@ package com.bridgeLabz;
 import java.util.Random;
 
 public class GamblingSimulation {
+    final int EVERY_DAY_STAKE =100;
     int stake = 100;
     final int BET = 1;
      int winOrLose(){           //creating method to find win or lose
@@ -30,11 +31,25 @@ public class GamblingSimulation {
          }
          return stake;
      }
+     void WinOrLoseForMonth(){
+         int totalStake=0;
+         int stakeAfterBetting=0;
+         for (int day=1;day<=20;day++){
+             stake = WinOrLoseForDay();
+             totalStake=totalStake + EVERY_DAY_STAKE;
+             stakeAfterBetting = stakeAfterBetting + stake;
+             stake = EVERY_DAY_STAKE;
+         }
+         if (totalStake > stakeAfterBetting)
+             System.out.println("Gambler wins for the month : " + (totalStake-stakeAfterBetting));
+         else
+             System.out.println("Gambler loses for the month : " + (stakeAfterBetting-totalStake));
+     }
 
 
     public static void main(String[] args) {
         GamblingSimulation gamblingSimulation = new GamblingSimulation();
-        System.out.println(gamblingSimulation.WinOrLoseForDay());
+        gamblingSimulation.WinOrLoseForMonth();
 
     }
 }
