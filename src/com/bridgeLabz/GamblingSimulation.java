@@ -24,11 +24,17 @@ public class GamblingSimulation {
         }
         return stake;
     }
+    int WinOrLoseForDay(){
+         while (stake>50 && stake<150) {
+             winOrLose();
+         }
+         return stake;
+     }
 
 
     public static void main(String[] args) {
         GamblingSimulation gamblingSimulation = new GamblingSimulation();
-        System.out.println(gamblingSimulation.winOrLose());
+        System.out.println(gamblingSimulation.WinOrLoseForDay());
 
     }
 }
