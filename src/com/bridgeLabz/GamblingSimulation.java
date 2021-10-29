@@ -26,26 +26,34 @@ public class GamblingSimulation {
         return stake;
     }
     int WinOrLoseForDay(){
+         int winCount = 0;
+         int loseCount = 0;
          while (stake>50 && stake<150) {
              winOrLose();
          }
          return stake;
      }
-     void WinOrLoseForMonth(){
-         int totalStake=0;
-         int stakeAfterBetting=0;
-         for (int day=1;day<=20;day++){
+     void WinOrLoseForMonth() {
+         int totalStake = 0;
+         int stakeAfterBetting = 0;
+         int winCount = 0;
+         int loseCount = 0;
+         for (int day = 1; day <= 20; day++) {
              stake = WinOrLoseForDay();
-             totalStake=totalStake + EVERY_DAY_STAKE;
+             if (stake < EVERY_DAY_STAKE)
+                 loseCount++;
+             else
+                 winCount++;
+             totalStake = totalStake + EVERY_DAY_STAKE;
              stakeAfterBetting = stakeAfterBetting + stake;
              stake = EVERY_DAY_STAKE;
          }
          if (totalStake > stakeAfterBetting)
-             System.out.println("Gambler wins for the month : " + (totalStake-stakeAfterBetting));
+             System.out.println("Gambler loses for the month : " + (totalStake - stakeAfterBetting));
          else
-             System.out.println("Gambler loses for the month : " + (stakeAfterBetting-totalStake));
+             System.out.println("Gambler wins for the month : " + (stakeAfterBetting - totalStake));
+         System.out.println("count of winning days : " + winCount + "\n count of losing days : " + loseCount);
      }
-
 
     public static void main(String[] args) {
         GamblingSimulation gamblingSimulation = new GamblingSimulation();
